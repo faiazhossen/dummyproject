@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -16,6 +17,11 @@ public class SecondActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+//        Toast.makeText(this, getIntent().getExtras().getString("name"), Toast.LENGTH_SHORT).show();
+        Bundle b =getIntent().getExtras();
+        Toast.makeText(this, ""+b.get("val"), Toast.LENGTH_SHORT).show();;
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -6,39 +6,41 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MainActivity extends AppCompatActivity {
-    private Bundle mSavedInstanceState;
-    private Button btn_press;
-    private Button btn_next;
+
+    @BindView(R.id.btn_submit)
+    Button btn_submit;
+
+    @BindView(R.id.edt_name)
+    EditText edt_name;
+
+
     private final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d(TAG, "onCreate: ");
+        ButterKnife.bind(this);
 
-        btn_press = findViewById(R.id.btn_click);
 
-        btn_press.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Button clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
+    }
 
-        btn_next = findViewById(R.id.btn_next);
-
-        btn_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,SecondActivity.class);
-                startActivity(intent);
-            }
-        });
-
+    @OnClick(R.id.btn_submit)
+    void submit(){
+        Intent intent = new Intent(this,SecondActivity.class);
+       Bundle b = new Bundle();
+       b.putString("val",edt_name.getText().toString());
+//       intent.putExtra("name",edt_name.getText().toString());
+        intent.putExtras(b);
+       startActivity(intent);
     }
 
     @Override
